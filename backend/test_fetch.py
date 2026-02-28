@@ -15,6 +15,6 @@ def fetch_data(email, password):
     except Exception as e:
         print(f"[{email}] Error:", e)
 
-fetch_data('admin@acmecorp.com', 'admin123')
-fetch_data('regional.manager@acmecorp.com', 'regional123') # assuming this exists based on old context
-fetch_data('agent.na@acmecorp.com', 'agent123')
+fetch_data('admin@test.com', 'admin123')
+fetch_data('regional.manager@test.com', 'regional123') # assuming this exists based on old context
+fetch_data('agent.na@test.com', 'agent123')

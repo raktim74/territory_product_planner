@@ -100,7 +100,7 @@ The backend is mapped using a strictly enforced **Domain-Driven Design (DDD)** a
 
 If `init.sql` has successfully seeded your database, the following accounts exist out-of-the-box:
 
-- **Global Administrator:** `admin@acmecorp.com` / `admin123`
+- **Global Administrator:** `admin@test.com` / `admin123`
   - Access to everything. Dashboard Analytics generate sum equations mapping *the entire* globe unconditionally.
 - **Regional Setup:** Create a new user mapping through the Org Chart to test localized permission fencing.
 

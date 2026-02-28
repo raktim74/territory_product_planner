@@ -100,13 +100,13 @@ ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name;
 -- DELETE FROM roles WHERE name IN ('Admin', 'RegionalManager', 'ZonalManager', 'TerritoryManager', 'SalesRep');
 
 -- Initial Tenant (Default)
-INSERT INTO tenants (name) VALUES ('Acme Corp') 
+INSERT INTO tenants (name) VALUES ('Raktim Corp') 
 ON CONFLICT (name) DO NOTHING;
 
 -- Initial Admin User (password: admin123)
 INSERT INTO users (tenant_id, email, hashed_password, role_id) 
-SELECT id, 'admin@acmecorp.com', 'admin123', (SELECT id FROM roles WHERE name = 'ADMIN')
-FROM tenants WHERE name = 'Acme Corp'
+SELECT id, 'admin@test.com', 'admin123', (SELECT id FROM roles WHERE name = 'ADMIN')
+FROM tenants WHERE name = 'Raktim Corp'
 ON CONFLICT (email) DO UPDATE SET 
     role_id = EXCLUDED.role_id,
     hashed_password = EXCLUDED.hashed_password;
@@ -114,11 +114,11 @@ ON CONFLICT (email) DO UPDATE SET
 -- Initial Territories
 INSERT INTO territories (tenant_id, name, type)
 SELECT id, 'North America', 'COUNTRY'
-FROM tenants WHERE name = 'Acme Corp'
+FROM tenants WHERE name = 'Raktim Corp'
 ON CONFLICT DO NOTHING;
 
 -- Initial Products
 INSERT INTO products (tenant_id, name, sku, base_price, category)
 SELECT id, 'Enterprise License', 'EL-001', 5000.0, 'Software'
-FROM tenants WHERE name = 'Acme Corp'
+FROM tenants WHERE name = 'Raktim Corp'
 ON CONFLICT DO NOTHING;
