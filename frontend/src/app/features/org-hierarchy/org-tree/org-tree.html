@@ -1,0 +1,35 @@
+<div class="org-hierarchy-container">
+    <div class="header">
+        <div class="header-left">
+            <h2>Organization Hierarchy</h2>
+            <p>Manage and view territory and reporting structures</p>
+        </div>
+        <div class="header-actions">
+            <!-- Future: A modal to assign new employees -->
+            <button class="btn-primary" routerLink="/org-hierarchy/new">+ Assign Employee</button>
+        </div>
+    </div>
+
+    <div class="tree-canvas">
+
+        <div *ngIf="hierarchyService.isLoading()" class="loading-state">
+            <span class="loader"></span> Loading hierarchy...
+        </div>
+
+        <div *ngIf="errorMsg" class="error-state">
+            {{ errorMsg }}
+        </div>
+
+        <div *ngIf="!hierarchyService.isLoading() && !errorMsg" class="tree-container-outer">
+            <div *ngIf="hierarchyService.orgTree() as treeNodes" class="tree-root-flex">
+                <!-- Render each top root node (e.g. CEO / Global Admins) -->
+                <app-tree-node *ngFor="let rootNode of treeNodes" [node]="rootNode">
+                </app-tree-node>
+
+                <div *ngIf="treeNodes.length === 0" class="empty-state">
+                    No hierarchy defined for your organization yet.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

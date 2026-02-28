@@ -1,0 +1,131 @@
+.territory-container {
+    padding: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.m-left {
+    margin-left: 12px;
+}
+
+.identity-cell {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-name {
+    font-weight: 700;
+    color: #fff;
+}
+
+.sub-id {
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.parent-link {
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.root-node {
+    font-style: italic;
+    color: #475569;
+}
+
+.parent-indicator {
+    color: #3b82f6;
+    font-weight: 500;
+}
+
+.assigned-stack {
+    display: flex;
+    align-items: center;
+    gap: -8px;
+    /* overlapping effect */
+}
+
+.avatar-sm {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #334155;
+    border: 2px solid #1e293b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 800;
+    color: #fff;
+}
+
+.not-assigned {
+    font-size: 0.85rem;
+    color: #475569;
+}
+
+.action-grid {
+    display: flex;
+    gap: 8px;
+}
+
+.tool-btn {
+    background: rgba(30, 41, 59, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.tool-btn:hover {
+    background: #334155;
+    transform: translateY(-2px);
+    border-color: #3b82f6;
+}
+
+.tool-btn.delete:hover {
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+.empty-boundary {
+    padding: 100px 0;
+    text-align: center;
+}
+
+.empty-splash .icon {
+    font-size: 4rem;
+    opacity: 0.2;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.empty-splash h3 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.shimmer-row {
+    height: 60px;
+    background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}

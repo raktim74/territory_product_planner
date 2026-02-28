@@ -1,0 +1,48 @@
+<div class="app-shell" [class.logged-in]="authService.isAuthenticated()">
+    <nav class="app-sidebar" *ngIf="authService.isAuthenticated()">
+        <div class="brand">
+            <div class="logo-box">TM</div>
+            <span class="brand-name">TSaaS</span>
+        </div>
+
+        <div class="nav-links">
+            <a routerLink="/dashboard" routerLinkActive="active" class="nav-item">
+                <span class="icon">🏠</span>
+                <span class="nav-label">Dashboard</span>
+            </a>
+            <a routerLink="/territory"
+                *ngIf="authService.hasPermission('all') || authService.hasPermission('read:territory') || authService.hasPermission('write:territory')"
+                routerLinkActive="active" class="nav-item">
+                <span class="icon">🗺️</span>
+                <span class="nav-label">Territories</span>
+            </a>
+            <a routerLink="/org-hierarchy"
+                *ngIf="authService.hasPermission('all') || authService.hasPermission('read:hierarchy') || authService.hasPermission('write:hierarchy')"
+                routerLinkActive="active" class="nav-item">
+                <span class="icon">👥</span>
+                <span class="nav-label">Organization</span>
+            </a>
+            <a routerLink="/products" routerLinkActive="active" class="nav-item">
+                <span class="icon">📦</span>
+                <span class="nav-label">Products</span>
+            </a>
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="user-block" *ngIf="authService.currentUser() as user">
+                <div class="user-avatar">{{ user.email[0].toUpperCase() }}</div>
+                <div class="user-info">
+                    <span class="u-email">{{ user.email }}</span>
+                    <span class="u-role">{{ user.role?.name || '' }}</span>
+                </div>
+            </div>
+            <button class="logout-link" (click)="authService.logout()">
+                🚪 Logout
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-stage">
+        <router-outlet />
+    </main>
+</div>

@@ -1,0 +1,131 @@
+.product-container {
+    padding: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.product-info-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.product-name-primary {
+    font-weight: 700;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.product-desc-secondary {
+    color: #64748b;
+    font-size: 0.85rem;
+}
+
+.sku-label {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    background: rgba(15, 23, 42, 0.5);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: #94a3b8;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.badge.category {
+    background: rgba(59, 130, 246, 0.1);
+    color: #60a5fa;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.price-value {
+    font-weight: 700;
+    color: #fbbf24;
+    font-size: 1.1rem;
+}
+
+.action-set {
+    display: flex;
+    gap: 8px;
+}
+
+.action-btn {
+    background: rgba(30, 41, 59, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 1.1rem;
+}
+
+.action-btn:hover {
+    background: #334155;
+    border-color: #3b82f6;
+    transform: scale(1.1);
+}
+
+.empty-placeholder {
+    height: 300px;
+    text-align: center;
+}
+
+.empty-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    color: #64748b;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    opacity: 0.2;
+}
+
+.loading-state {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.shimmer-row {
+    height: 60px;
+    background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 12px;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+.price-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.pricing-badge {
+    font-size: 0.7rem;
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+    width: fit-content;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}

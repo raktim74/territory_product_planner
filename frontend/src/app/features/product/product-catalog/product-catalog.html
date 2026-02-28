@@ -1,0 +1,84 @@
+<div class="product-container">
+    <div class="header">
+        <div class="header-left">
+            <h2>Product Catalog</h2>
+            <p>Enterprise inventory and localized pricing management.</p>
+        </div>
+        <div class="header-actions">
+            <button class="btn-primary" routerLink="/products/new">
+                <span>+</span> Add New Product
+            </button>
+        </div>
+    </div>
+
+    <div class="table-card">
+        <div *ngIf="productService.isLoading()" class="loading-state">
+            <div class="shimmer-row"></div>
+            <div class="shimmer-row"></div>
+            <div class="shimmer-row"></div>
+        </div>
+
+        <table *ngIf="!productService.isLoading()" class="modern-table">
+            <thead>
+                <tr>
+                    <th>Product Details</th>
+                    <th>SKU ID</th>
+                    <th>Category</th>
+                    <th>Standard Price</th>
+                    <th>Operational Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of productService.products()">
+                    <td>
+                        <div class="product-info-cell">
+                            <span class="product-name-primary">{{ product.name }}</span>
+                            <span class="product-desc-secondary">{{ product.description || 'No detailed description'
+                                }}</span>
+                        </div>
+                    </td>
+                    <td><span class="sku-label">{{ product.sku }}</span></td>
+                    <td>
+                        <span class="badge category">{{ product.category || 'Standard' }}</span>
+                    </td>
+                    <td>
+                        <div class="price-container">
+                            <span class="price-value">{{ product.base_price | currency:'USD' }}</span>
+                            <span class="pricing-badge" *ngIf="product.price_overrides_count > 0">
+                                {{ product.price_overrides_count }} Regional Price{{ product.price_overrides_count > 1 ?
+                                's' : '' }}
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="status-indicator" [class.active]="product.is_active">
+                            {{ product.is_active ? 'Active' : 'Inactive' }}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="action-set">
+                            <button class="action-btn" title="View details" (click)="viewDetails(product)">💰</button>
+                            <button class="action-btn" title="Edit product"
+                                [routerLink]="['/products/edit', product.id]">✏️</button>
+                            <button class="action-btn" title="Delete product"
+                                (click)="onDelete(product.id)">🗑️</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr *ngIf="productService.products().length === 0 && !productService.isLoading()">
+                    <td colspan="6" class="empty-placeholder">
+                        <div class="empty-content">
+                            <span class="empty-icon">📦</span>
+                            <p>Your catalog is currently empty.</p>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Regional Price Planning Modal -->
+    <app-price-planner *ngIf="selectedProduct()" [product]="selectedProduct()"
+        (close)="selectedProduct.set(null); productService.fetchProducts().subscribe()" />
+</div>

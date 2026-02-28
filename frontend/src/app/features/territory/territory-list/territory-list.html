@@ -1,0 +1,90 @@
+<div class="territory-container">
+    <div class="header">
+        <div class="header-left">
+            <h2>Territory Management</h2>
+            <p>Geographic orchestration and regional governance.</p>
+        </div>
+        <div class="header-actions">
+            <button class="btn-primary" routerLink="/territory/new">
+                <span>+</span> Create Region
+            </button>
+            <button class="btn-secondary m-left" routerLink="/territory/map">
+                Manage Maps
+            </button>
+        </div>
+    </div>
+
+    <div class="table-card">
+        <div *ngIf="territoryService.isLoading()" class="loading-state">
+            <div class="shimmer-row"></div>
+            <div class="shimmer-row"></div>
+            <div class="shimmer-row"></div>
+        </div>
+
+        <table *ngIf="!territoryService.isLoading()" class="modern-table">
+            <thead>
+                <tr>
+                    <th>Region Identity</th>
+                    <th>Classification</th>
+                    <th>Structural Parent</th>
+                    <th>Assigned Personnel</th>
+                    <th>Governance Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let territory of territoryService.territories()">
+                    <td>
+                        <div class="identity-cell">
+                            <span class="main-name">{{ territory.name }}</span>
+                            <span class="sub-id muted">ID-{{ territory.id }}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="badge" [class]="territory.type.toLowerCase()">{{ territory.type }}</span>
+                    </td>
+                    <td>
+                        <div class="parent-link">
+                            <span *ngIf="territory.parent_id" class="parent-indicator">
+                                ↑ Parent-ID: {{ territory.parent_id }}
+                            </span>
+                            <span *ngIf="!territory.parent_id" class="root-node">Root Region</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="assigned-stack">
+                            <div *ngFor="let u of territory.assigned_users" class="avatar-sm" title="User ID: {{u}}">
+                                {{u}}
+                            </div>
+                            <span *ngIf="territory.assigned_users.length === 0" class="not-assigned">No Ownership</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="status-indicator" [class.active]="territory.is_active">
+                            {{ territory.is_active ? 'Active Operation' : 'Dormant' }}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="action-grid">
+                            <button class="tool-btn view" title="View details"
+                                (click)="viewDetails(territory)">👁</button>
+                            <button class="tool-btn edit" title="Edit territory"
+                                [routerLink]="['/territory/edit', territory.id]">✏️</button>
+                            <button class="tool-btn delete" title="Delete territory"
+                                (click)="onDelete(territory.id)">🚫</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr *ngIf="territoryService.territories().length === 0 && !territoryService.isLoading()">
+                    <td colspan="6" class="empty-boundary">
+                        <div class="empty-splash">
+                            <span class="icon">🗺️</span>
+                            <h3>No Territories Mapped</h3>
+                            <p>Start by creating your first region boundary.</p>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
